@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:46 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/01 14:42:47 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/01 17:58:23 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct	s_data
 	int red;
 	int green;
 	int blue;
+	int incl;
+	int	color;
 	int col;
 }				t_data;
 

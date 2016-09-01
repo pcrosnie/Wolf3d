@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:22 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/01 15:21:55 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/01 18:13:21 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,33 @@ void	ft_set_rays(t_data *ptr)
 
 int		ft_move(int key, t_data *ptr)
 {
+	if (key == 126)
+	{
+		ptr->posY += 0.1 * sin(ptr->angle);
+		ptr->posX += 0.1 * cos(ptr->angle);
+	}
+	if (key == 125)
+	{
+		ptr->posY -= 0.1 * sin(ptr->angle);
+		ptr->posX -= 0.1 * cos(ptr->angle);
+	}
+	if (key == 123)
+	{
+		ptr->posY -= 0.1 * cos(ptr->angle);
+		ptr->posX += 0.1 * sin(ptr->angle);
+	}
+	if (key == 124)
+	{
+		ptr->posY += 0.1 * cos(ptr->angle);
+		ptr->posX -= 0.1 * sin(ptr->angle);
+	}
+	/*
 	(key == 126) ? ptr->posY += 0.1 : 0;
 	(key == 125) ? ptr->posY -= 0.1 : 0;
 	(key == 123) ? ptr->posX += 0.1 : 0;
-	(key == 124) ? ptr->posX -= 0.1 : 0;
-	(key == 0) ? ptr->angle += M_PI_2 / 100 : 0;
-	(key == 2) ? ptr->angle -= M_PI_2 / 100 : 0;
+	(key == 124) ? ptr->posX -= 0.1 : 0;*/
+	(key == 0) ? ptr->angle -= M_PI_2 / 100 : 0;
+	(key == 2) ? ptr->angle += M_PI_2 / 100 : 0;
 	(key == 53) ? exit(0) : 0;
 	free(ptr->data_addr);
 	ptr->pict = mlx_new_image(ptr->mlx, 1280, 800);
