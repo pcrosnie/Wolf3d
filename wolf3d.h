@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:46 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/01 13:10:08 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/01 14:42:47 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_data
 	double posX;
 	double posY;
 	double angle;
+	double tmp_angle;
 	double rx;
 	double ry;
 	int red;

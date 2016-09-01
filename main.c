@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:22 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/01 14:05:32 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/01 15:21:55 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,19 @@ void	ft_parse_map(char *file, t_data *ptr)
 	char *line;
 
 	fd = open(file, O_RDONLY);
-	i = 0;
+	i = 1;
 	line = (char *)ft_memalloc(sizeof(char) * BUFF_SIZE + 1);
 	ptr->map = (char **)ft_memalloc(sizeof(char *) * BUFF_SIZE);
 	line = ft_memset(line, '\0', BUFF_SIZE);
 	while (get_next_line(fd, &line))
 	{
-		ptr->map[i] = ft_strdup(line);
+		ptr->map[i] = ft_strjoin("1", line);
+		ptr->map[i] = ft_strjoin(ptr->map[i], "1");
 		i++;
 	}
 	ptr->map_width = ft_strlen(ptr->map[i - 1]);
+	ptr->map[0] = ft_memset(ft_strnew(BUFF_SIZE), '1', ptr->map_width);
+	ptr->map[i++] = ft_memset(ft_strnew(BUFF_SIZE), '1', ptr->map_width);
 	ptr->map[i] = NULL;
 	ptr->map_height = i;
 
@@ -60,6 +63,7 @@ void	ft_set_rays(t_data *ptr)
 	double	ry;
 	double	angle;
 
+	ptr->col = 0;
 	angle = ptr->angle - M_PI_4;
 	rx = cos(angle);
 	ry = sin(angle);
@@ -69,6 +73,7 @@ void	ft_set_rays(t_data *ptr)
 		ry = sin(angle);
 		ptr->rx = rx;
 		ptr->ry = ry;
+		ptr->tmp_angle = angle;
 		ft_check_wall(ptr);
 		angle += M_PI_2 / 1280;
 		ptr->col++;
@@ -81,6 +86,9 @@ int		ft_move(int key, t_data *ptr)
 	(key == 125) ? ptr->posY -= 0.1 : 0;
 	(key == 123) ? ptr->posX += 0.1 : 0;
 	(key == 124) ? ptr->posX -= 0.1 : 0;
+	(key == 0) ? ptr->angle += M_PI_2 / 100 : 0;
+	(key == 2) ? ptr->angle -= M_PI_2 / 100 : 0;
+	(key == 53) ? exit(0) : 0;
 	free(ptr->data_addr);
 	ptr->pict = mlx_new_image(ptr->mlx, 1280, 800);
 	ptr->data_addr = mlx_get_data_addr(ptr->pict, &(ptr->bits), &(ptr->len), &(ptr->endian));
