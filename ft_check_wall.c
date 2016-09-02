@@ -43,11 +43,17 @@ void		ft_set_wall_color(t_data *ptr, double x, double y, double i)
 		ptr->color = 4;
 	}
 	x -= 0.5;
-	y -= 1;
-	(fabs(x - tmpX) < 0.005 && fabs(y - tmpY) < 0.005) ? ptr->color = 0 : 0;
-	(fabs(x + 1 - tmpX) < 0.005 && fabs(y - tmpY) < 0.005) ? ptr->color = 0 : 0;
-	(fabs(x - tmpX) < 0.005 && fabs(y + 1 - tmpY) < 0.005) ? ptr->color = 0 : 0;
-	(fabs(x + 1 - tmpX) < 0.005 && fabs(y + 1 - tmpY) < 0.005) ? ptr->color = 0 : 0;
+	y -= 1;/*
+	(hypot(x - tmpX, y - tmpY) < 0.02 * (hypot(ptr->posX - x, ptr->posY - y) * 0.1)) ? ptr->color = 0 : 0;
+	(hypot(x + 1 - tmpX, y - tmpY) < 0.02 * (hypot(ptr->posX - x + 1, ptr->posY - y) * 0.1)) ? ptr->color = 0 : 0;
+	(hypot(x - tmpX, y + 1 - tmpY) < 0.02 * (hypot(ptr->posX - x, ptr->posY - y + 1) * 0.1)) ? ptr->color = 0 : 0;
+	(hypot(x + 1 - tmpX, y + 1 - tmpY) < 0.02 * (hypot(ptr->posX - x + 1, ptr->posY - y + 1) * 0.1)) ? ptr->color = 0 : 0;
+*/	
+	(hypot(x - tmpX, y - tmpY) < 0.02) ? ptr->color = 0 : 0;
+	(hypot(x + 1 - tmpX, y - tmpY) < 0.02) ? ptr->color = 0 : 0;
+	(hypot(x - tmpX, y + 1 - tmpY) < 0.02) ? ptr->color = 0 : 0;
+	(hypot(x + 1 - tmpX, y + 1 - tmpY) < 0.02) ? ptr->color = 0 : 0;
+
 }
 
 int		ft_inter(t_data *ptr, double i)
@@ -116,6 +122,11 @@ void	ft_draw_ray(t_data *ptr, double a)
 //	ptr->red = 255;
 	while (i < 400 + height && i < 800 && i >= 0 && ptr->col < 1280)
 		ft_draw(ptr, ptr->col, i++);
+	ptr->red = 0;
+	ptr->blue = 0;
+	ptr->green = 0;
+	while (i < 400 + height + 4 && i < 800)
+	ft_draw(ptr, ptr->col, i++);
 	ptr->red = 0;
 	ptr->blue = 255;
 	ptr->green = 0;
