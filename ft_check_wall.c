@@ -40,11 +40,11 @@ void	ft_draw_ray(t_data *ptr, double a)
 	(i < 0) ? i = 0 : 0;
 	ptr->blue = 0;
 	ptr->red = 255;
-	while (i < 400 + height && i < 800 && i >= 0)
+	while (i < 400 + height && i < 800 && i >= 0 && ptr->col < 1280)
 		ft_draw(ptr, ptr->col, i++);
 	ptr->red = 0;
 	ptr->blue = 255;
-	while (i < 799 && i > 0)
+	while (i < 799 && i > 0 && ptr->col < 1280)
 		ft_draw(ptr, ptr->col, i++);
 }
 

@@ -80,29 +80,56 @@ void	ft_set_rays(t_data *ptr)
 	}
 }
 
+int		ft_check_pos(t_data *ptr)
+{
+	if (ptr->map[(int)ptr->posY][(int)ptr->posX] == '1')
+		return (0);
+	return (1);
+}
+
 int		ft_move(int key, t_data *ptr)
 {
 	if (key == 126)
 	{
-		ptr->posY += 0.1 * sin(ptr->angle);
-		ptr->posX += 0.1 * cos(ptr->angle);
+		ptr->posY += 0.2 * sin(ptr->angle);
+		ptr->posX += 0.2 * cos(ptr->angle);
+		if (ft_check_pos(ptr) == 0)
+		{
+			ptr->posY -= 0.2 * sin(ptr->angle);
+			ptr->posX -= 0.2 * cos(ptr->angle);	
+		}
 	}
 	if (key == 125)
 	{
-		ptr->posY -= 0.1 * sin(ptr->angle);
-		ptr->posX -= 0.1 * cos(ptr->angle);
+		ptr->posY -= 0.2 * sin(ptr->angle);
+		ptr->posX -= 0.2 * cos(ptr->angle);
+		if (ft_check_pos(ptr) == 0)
+		{
+			ptr->posY += 0.2 * sin(ptr->angle);
+			ptr->posX += 0.2 * cos(ptr->angle);
+		}
 	}
 	if (key == 123)
 	{
-		ptr->posY -= 0.1 * cos(ptr->angle);
-		ptr->posX += 0.1 * sin(ptr->angle);
+		ptr->posY -= 0.2 * cos(ptr->angle);
+		ptr->posX += 0.2 * sin(ptr->angle);
+		if (ft_check_pos(ptr) == 0)
+		{
+			ptr->posY += 0.2 * cos(ptr->angle);
+			ptr->posX -= 0.2 * sin(ptr->angle);
+		}
 	}
 	if (key == 124)
 	{
-		ptr->posY += 0.1 * cos(ptr->angle);
-		ptr->posX -= 0.1 * sin(ptr->angle);
+		ptr->posY += 0.2 * cos(ptr->angle);
+		ptr->posX -= 0.2 * sin(ptr->angle);
+		if (ft_check_pos(ptr) == 0)
+		{
+			ptr->posY -= 0.2 * cos(ptr->angle);
+			ptr->posX += 0.2 * sin(ptr->angle);
+		}
 	}
-	printf("X : %f\nY : %f\n", ptr->posX, ptr->posY);
+//	printf("X : %f\nY : %f\n", ptr->posX, ptr->posY);
 	/*
 	(key == 126) ? ptr->posY += 0.1 : 0;
 	(key == 125) ? ptr->posY -= 0.1 : 0;
