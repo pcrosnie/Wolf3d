@@ -41,7 +41,7 @@ typedef struct	s_data
 	int green;
 	int blue;
 	int incl;
-	int	color;
+	int color;
 	int col;
 }				t_data;
 

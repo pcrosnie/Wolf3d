@@ -12,6 +12,44 @@
 
 #include "wolf3d.h"
 
+void		ft_set_wall_color(t_data *ptr, double x, double y, double i)
+{
+	double tmpX;
+	double tmpY;
+	double tmp;
+	
+	tmpX = ptr->posX + (ptr->rx * i);
+	tmpY = ptr->posY + (ptr->ry * i);
+	x += 0.5;
+	tmp = hypot(x - tmpX, y - tmpY);
+	ptr->color = 1;
+	x -= 0.5;
+	y += 0.5;
+	if (hypot(x - tmpX, y - tmpY) < tmp)
+	{
+		tmp = hypot(x - tmpX, y - tmpY);
+		ptr->color = 2;
+	}
+	x += 1;
+	if (hypot(x - tmpX, y - tmpY) < tmp)
+	{
+		tmp = hypot(x - tmpX, y - tmpY);
+		ptr->color = 3;
+	}
+	x -= 0.5;
+	y += 0.5;
+	if (hypot(x - tmpX, y - tmpY) < tmp)
+	{
+		ptr->color = 4;
+	}
+	x -= 0.5;
+	y -= 1;
+	(fabs(x - tmpX) < 0.005 && fabs(y - tmpY) < 0.005) ? ptr->color = 0 : 0;
+	(fabs(x + 1 - tmpX) < 0.005 && fabs(y - tmpY) < 0.005) ? ptr->color = 0 : 0;
+	(fabs(x - tmpX) < 0.005 && fabs(y + 1 - tmpY) < 0.005) ? ptr->color = 0 : 0;
+	(fabs(x + 1 - tmpX) < 0.005 && fabs(y + 1 - tmpY) < 0.005) ? ptr->color = 0 : 0;
+}
+
 int		ft_inter(t_data *ptr, double i)
 {
 	double tmpX;
@@ -23,9 +61,44 @@ int		ft_inter(t_data *ptr, double i)
 	x = (int)tmpX;
 	tmpY = ptr->posY + (ptr->ry * i);
 	y = (int)tmpY;
+	ft_set_wall_color(ptr, x, y, i);
 	if (ptr->map[y] && ptr->map[y][x] && ptr->map[y][x] == '1')
 		return (1);
 	return (0);
+}
+
+void	ft_set_color(t_data *ptr)
+{
+	if (ptr->color == 0)
+	{
+		ptr->red = 0;
+		ptr->green = 0;
+		ptr->blue = 0;
+	}
+	if (ptr->color == 1)
+	{
+		ptr->red = 0;
+		ptr->green = 255;
+		ptr->blue = 0;
+	}
+	if (ptr->color == 2)
+	{
+		ptr->red = 255;
+		ptr->blue = 255;
+		ptr->green = 0;
+	}
+	if (ptr->color == 3)
+	{
+		ptr->red = 255;
+		ptr->green = 255;
+		ptr->blue = 0;
+	}
+	if (ptr->color == 4)
+	{
+		ptr->red = 255;
+		ptr->blue = 0;
+		ptr->green = 0;
+	}
 }
 
 void	ft_draw_ray(t_data *ptr, double a)
@@ -38,12 +111,14 @@ void	ft_draw_ray(t_data *ptr, double a)
 	height = 1200 / a;
 	i = 400 - height;
 	(i < 0) ? i = 0 : 0;
-	ptr->blue = 0;
-	ptr->red = 255;
+	ft_set_color(ptr);
+//	ptr->blue = 0;
+//	ptr->red = 255;
 	while (i < 400 + height && i < 800 && i >= 0 && ptr->col < 1280)
 		ft_draw(ptr, ptr->col, i++);
 	ptr->red = 0;
 	ptr->blue = 255;
+	ptr->green = 0;
 	while (i < 799 && i > 0 && ptr->col < 1280)
 		ft_draw(ptr, ptr->col, i++);
 }
