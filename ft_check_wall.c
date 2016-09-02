@@ -35,11 +35,12 @@ void	ft_draw_ray(t_data *ptr, double a)
 
 	a = a * cos(ptr->tmp_angle - ptr->angle);
 //	printf("\n%f\n", a);
-	height = 400 / a;
+	height = 1200 / a;
 	i = 400 - height;
+	(i < 0) ? i = 0 : 0;
 	ptr->blue = 0;
 	ptr->red = 255;
-	while (i < 400 + height && i < 800 && i > 0)
+	while (i < 400 + height && i < 800 && i >= 0)
 		ft_draw(ptr, ptr->col, i++);
 	ptr->red = 0;
 	ptr->blue = 255;
@@ -61,10 +62,16 @@ void	ft_check_wall(t_data *ptr)
 	{
 		if (ft_inter(ptr, i) == 1)
 		{
+		//	i -= 1;
+		//	while (ft_inter(ptr, i) != 1)
+		//		i += 0.1;
+			i -= 0.1;
+			while (ft_inter(ptr, i) != 1)
+				i += 0.001;
 //			ft_set_colors(ptr);
 			a = 1;
 			ft_draw_ray(ptr, i);
 		}
-		i += 0.01;
+		i += 0.1;
 	}
 }

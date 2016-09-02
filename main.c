@@ -64,10 +64,10 @@ void	ft_set_rays(t_data *ptr)
 	double	angle;
 
 	ptr->col = 0;
-	angle = ptr->angle - M_PI_4;
+	angle = ptr->angle - (M_PI / 12);
 	rx = cos(angle);
 	ry = sin(angle);
-	while (angle < ptr->angle + M_PI_4)
+	while (angle < ptr->angle + (M_PI / 12))
 	{
 		rx = cos(angle);
 		ry = sin(angle);
@@ -75,7 +75,7 @@ void	ft_set_rays(t_data *ptr)
 		ptr->ry = ry;
 		ptr->tmp_angle = angle;
 		ft_check_wall(ptr);
-		angle += M_PI_2 / 1280;
+		angle += M_PI / 6 / 1280;
 		ptr->col++;
 	}
 }
@@ -102,6 +102,7 @@ int		ft_move(int key, t_data *ptr)
 		ptr->posY += 0.1 * cos(ptr->angle);
 		ptr->posX -= 0.1 * sin(ptr->angle);
 	}
+	printf("X : %f\nY : %f\n", ptr->posX, ptr->posY);
 	/*
 	(key == 126) ? ptr->posY += 0.1 : 0;
 	(key == 125) ? ptr->posY -= 0.1 : 0;
@@ -144,7 +145,7 @@ int		main(int argc, char **argv)
 	ptr->green = 0;
 	ptr->blue = 0;
 	ptr->col = 0;
-	ptr->posX = 5;
-	ptr->posY = 7;
+	ptr->posX = 1;
+	ptr->posY =1;
 	ft_init(ptr);
 }
