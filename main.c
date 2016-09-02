@@ -135,8 +135,8 @@ int		ft_move(int key, t_data *ptr)
 	(key == 125) ? ptr->posY -= 0.1 : 0;
 	(key == 123) ? ptr->posX += 0.1 : 0;
 	(key == 124) ? ptr->posX -= 0.1 : 0;*/
-	(key == 0) ? ptr->angle -= M_PI_2 / 100 : 0;
-	(key == 2) ? ptr->angle += M_PI_2 / 100 : 0;
+	(key == 0) ? ptr->angle -= M_PI_2 / 25 : 0;
+	(key == 2) ? ptr->angle += M_PI_2 / 25 : 0;
 	(key == 53) ? exit(0) : 0;
 	free(ptr->data_addr);
 	ptr->pict = mlx_new_image(ptr->mlx, 1280, 800);

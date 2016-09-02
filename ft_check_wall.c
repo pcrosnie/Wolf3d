@@ -107,6 +107,23 @@ void	ft_set_color(t_data *ptr)
 	}
 }
 
+void	ft_set_shadow(t_data *ptr, double a)
+{
+	a *= 3;
+	if (ptr->red - a < 0)
+		ptr->red = 0;
+	else
+		ptr->red -= a;
+	if (ptr->blue - a < 0)
+		ptr->blue = 0;
+	else
+		ptr->blue -= a;
+	if (ptr->green - a < 0)
+		ptr->green = 0;
+	else
+		ptr->green -= a;
+}
+
 void	ft_draw_ray(t_data *ptr, double a)
 {
 	int i;
@@ -118,6 +135,7 @@ void	ft_draw_ray(t_data *ptr, double a)
 	i = 400 - height;
 	(i < 0) ? i = 0 : 0;
 	ft_set_color(ptr);
+	ft_set_shadow(ptr, a);
 //	ptr->blue = 0;
 //	ptr->red = 255;
 	while (i < 400 + height && i < 800 && i >= 0 && ptr->col < 1280)
@@ -128,10 +146,13 @@ void	ft_draw_ray(t_data *ptr, double a)
 	while (i < 400 + height + 4 && i < 800)
 	ft_draw(ptr, ptr->col, i++);
 	ptr->red = 0;
-	ptr->blue = 255;
+	ptr->blue = 50;
 	ptr->green = 0;
 	while (i < 799 && i > 0 && ptr->col < 1280)
+	{
 		ft_draw(ptr, ptr->col, i++);
+		(i % 3 == 0) ? ptr->blue++ : 0;
+	}
 }
 
 void	ft_check_wall(t_data *ptr)
