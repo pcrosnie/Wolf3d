@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/03 10:20:22 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/03 11:20:30 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 11:42:59 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_check_line(char *line, int j, int len)
 	int i;
 
 	i = 0;
+	if (!line || !line[0])
+		return (0);
 	while (line && line[i])
 	{
 		if (line[i] != '1' && line[i] != '0')
