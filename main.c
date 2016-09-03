@@ -6,13 +6,13 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:22 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/03 09:59:15 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 11:21:05 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void    ft_draw(t_data *ptr, float x, float y)
+void	ft_draw(t_data *ptr, float x, float y)
 {
 	int nb;
 
@@ -20,61 +20,6 @@ void    ft_draw(t_data *ptr, float x, float y)
 	ptr->data_addr[nb] = ptr->red;
 	ptr->data_addr[nb + 1] = ptr->green;
 	ptr->data_addr[nb + 2] = ptr->blue;
-}
-
-int		ft_check_line(char *line, int j, int len)
-{
-	int i;
-
-	i = 0;
-	while (line && line[i])
-	{
-		if (line[i] != '1' && line[i] != '0')
-			return (0);
-		if (len != (int)ft_strlen(line) && j != 1)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	ft_parse_map(char *file, t_data *ptr)
-{
-	int fd;
-	int i;
-	char *line;
-	int ret;
-
-	fd = open(file, O_RDONLY);
-	i = 1;
-	line = (char *)ft_memalloc(sizeof(char) * BUFF_SIZE + 1);
-	ptr->map = (char **)ft_memalloc(sizeof(char *) * BUFF_SIZE);
-	line = ft_memset(line, '\0', BUFF_SIZE);
-	while ((ret = get_next_line(fd, &line)))
-	{
-		(ft_check_line(line, i, ptr->tmp_len) == 0) ? exit(0) : 0;
-		ptr->map[i] = ft_strjoin("1", line);
-		ptr->map[i] = ft_strjoin(ptr->map[i], "1");
-		ptr->tmp_len = ft_strlen(line);
-		i++;
-	}
-	((ret <= 0 || fd < 0) && i == 1) ? exit(0) : 0;
-	ptr->map_width = ft_strlen(ptr->map[i - 1]);
-	ptr->map[0] = ft_memset(ft_strnew(BUFF_SIZE), '1', ptr->map_width);
-	ptr->map[i++] = ft_memset(ft_strnew(BUFF_SIZE), '1', ptr->map_width);
-	ptr->map[i] = NULL;
-	ptr->map_height = i;
-
-	//	free(line);
-}
-
-void    vector_normalize(double *rx, double *ry)
-{
-	int     mod;
-
-	mod = sqrt((*rx * *rx) + (*ry * *ry));
-	*rx /= mod;
-	*ry /= mod;
 }
 
 void	ft_set_rays(t_data *ptr)
@@ -102,67 +47,9 @@ void	ft_set_rays(t_data *ptr)
 
 int		ft_check_pos(t_data *ptr)
 {
-	if (ptr->map[(int)ptr->posY][(int)ptr->posX] == '1')
+	if (ptr->map[(int)ptr->posy][(int)ptr->posx] == '1')
 		return (0);
 	return (1);
-}
-
-int		ft_move(int key, t_data *ptr)
-{
-	if (key == 126)
-	{
-		ptr->posY += 0.2 * sin(ptr->angle);
-		ptr->posX += 0.2 * cos(ptr->angle);
-		if (ft_check_pos(ptr) == 0)
-		{
-			ptr->posY -= 0.2 * sin(ptr->angle);
-			ptr->posX -= 0.2 * cos(ptr->angle);	
-		}
-	}
-	if (key == 125)
-	{
-		ptr->posY -= 0.2 * sin(ptr->angle);
-		ptr->posX -= 0.2 * cos(ptr->angle);
-		if (ft_check_pos(ptr) == 0)
-		{
-			ptr->posY += 0.2 * sin(ptr->angle);
-			ptr->posX += 0.2 * cos(ptr->angle);
-		}
-	}
-	if (key == 123)
-	{
-		ptr->posY -= 0.2 * cos(ptr->angle);
-		ptr->posX += 0.2 * sin(ptr->angle);
-		if (ft_check_pos(ptr) == 0)
-		{
-			ptr->posY += 0.2 * cos(ptr->angle);
-			ptr->posX -= 0.2 * sin(ptr->angle);
-		}
-	}
-	if (key == 124)
-	{
-		ptr->posY += 0.2 * cos(ptr->angle);
-		ptr->posX -= 0.2 * sin(ptr->angle);
-		if (ft_check_pos(ptr) == 0)
-		{
-			ptr->posY -= 0.2 * cos(ptr->angle);
-			ptr->posX += 0.2 * sin(ptr->angle);
-		}
-	}
-	/*
-	(key == 126) ? ptr->posY += 0.1 : 0;
-	(key == 125) ? ptr->posY -= 0.1 : 0;
-	(key == 123) ? ptr->posX += 0.1 : 0;
-	(key == 124) ? ptr->posX -= 0.1 : 0;*/
-	(key == 0) ? ptr->angle -= M_PI_2 / 25 : 0;
-	(key == 2) ? ptr->angle += M_PI_2 / 25 : 0;
-	(key == 53) ? exit(0) : 0;
-	free(ptr->data_addr);
-	ptr->pict = mlx_new_image(ptr->mlx, 1280, 800);
-	ptr->data_addr = mlx_get_data_addr(ptr->pict, &(ptr->bits), &(ptr->len), &(ptr->endian));
-	ft_set_rays(ptr);
-	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->pict, 0, 0);
-	return (0);
 }
 
 void	ft_init(t_data *ptr)
@@ -170,7 +57,8 @@ void	ft_init(t_data *ptr)
 	ptr->mlx = mlx_init();
 	ptr->win = mlx_new_window(ptr->mlx, 1280, 800, "wolf");
 	ptr->pict = mlx_new_image(ptr->mlx, 1280, 800);
-	ptr->data_addr = mlx_get_data_addr(ptr->pict, &(ptr->bits) , &(ptr->len), &(ptr->endian));
+	ptr->data_addr = mlx_get_data_addr(ptr->pict, &(ptr->bits),
+			&(ptr->len), &(ptr->endian));
 	ft_set_rays(ptr);
 	mlx_put_image_to_window(ptr->mlx, ptr->win, ptr->pict, 0, 0);
 	mlx_hook(ptr->win, 2, 1l << 0, ft_move, ptr);
@@ -185,13 +73,12 @@ int		main(int argc, char **argv)
 		return (0);
 	ptr = (t_data *)malloc(sizeof(t_data));
 	ft_parse_map(argv[1], ptr);
-//	ft_print_char_tab(ptr->map);
 	ptr->angle = M_PI_2;
 	ptr->red = 255;
 	ptr->green = 0;
 	ptr->blue = 0;
 	ptr->col = 0;
-	ptr->posX = 1;
-	ptr->posY =	1;
+	ptr->posx = 1;
+	ptr->posy = 1;
 	ft_init(ptr);
 }

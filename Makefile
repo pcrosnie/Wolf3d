@@ -6,7 +6,7 @@
 #    By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/24 13:16:13 by pcrosnie          #+#    #+#              #
-#    Updated: 2016/09/03 10:04:12 by pcrosnie         ###   ########.fr        #
+#    Updated: 2016/09/03 10:46:06 by pcrosnie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIB = libft/libft.a
 
 GLIB = minilibx_macos/libmlx.a
 
-SRC = main.c ft_check_wall.c
+SRC = main.c ft_check_wall.c ft_parse.c ft_move.c ft_set_color.c
 
 SRCO = $(SRC:.c=.o)
 
