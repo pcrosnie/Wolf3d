@@ -6,7 +6,7 @@
 #    By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/24 13:16:13 by pcrosnie          #+#    #+#              #
-#    Updated: 2016/09/01 12:49:01 by pcrosnie         ###   ########.fr        #
+#    Updated: 2016/09/03 10:04:12 by pcrosnie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,13 @@ all: $(NAME)
 
 $(NAME): $(SRCO)
 	make -C libft
+	make -C minilibx_macos
 	gcc $(FLAG) -c $(SRC)
 	gcc -o $(NAME) $(GFLAG) $(SRCO) $(LIB) $(GLIB)
 
 clean:
 	make -C libft clean
+	make -C minilibx_macos clean
 	rm -f $(SRCO)
 
 fclean: clean

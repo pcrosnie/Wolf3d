@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:46 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/01 17:58:23 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 09:59:18 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_data
 	int incl;
 	int color;
 	int col;
+	int tmp_len;
 }				t_data;
 
 void	ft_check_wall(t_data *ptr);

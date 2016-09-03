@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 11:29:24 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/01 18:20:07 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 09:42:17 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void	ft_draw_ray(t_data *ptr, double a)
 	int height;
 
 	a = a * cos(ptr->tmp_angle - ptr->angle);
-//	printf("\n%f\n", a);
 	height = 1200 / a;
 	i = 400 - height;
 	(i < 0) ? i = 0 : 0;
