@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/03 10:35:19 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/03 11:24:24 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 12:11:33 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	ft_set_f_colors(t_data *ptr)
 	}
 	if (ptr->color == 1)
 	{
-		ptr->red = 0;
-		ptr->green = 255;
+		ptr->red = 90;
+		ptr->green = 170;
 		ptr->blue = 0;
 	}
 }
@@ -76,20 +76,20 @@ void	ft_set_color(t_data *ptr)
 	ft_set_f_colors(ptr);
 	if (ptr->color == 2)
 	{
-		ptr->red = 255;
-		ptr->blue = 255;
-		ptr->green = 0;
+		ptr->red = 0;
+		ptr->blue = 200;
+		ptr->green = 145;
 	}
 	if (ptr->color == 3)
 	{
-		ptr->red = 255;
-		ptr->green = 255;
+		ptr->red = 150;
+		ptr->green = 0;
 		ptr->blue = 0;
 	}
 	if (ptr->color == 4)
 	{
-		ptr->red = 255;
-		ptr->blue = 0;
+		ptr->red = 145;
+		ptr->blue = 145;
 		ptr->green = 0;
 	}
 }

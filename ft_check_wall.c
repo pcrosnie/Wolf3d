@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 11:29:24 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/03 11:19:18 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 12:14:24 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_draw_ray(t_data *ptr, double a)
 	i = 400 - height;
 	(i < 0) ? i = 0 : 0;
 	ft_set_color(ptr);
-	ft_set_shadow(ptr, a);
+	(ptr->shadow == 1) ? ft_set_shadow(ptr, a) : 0;
 	while (i < 400 + height && i < 800 && i >= 0 && ptr->col < 1280)
 		ft_draw(ptr, ptr->col, i++);
 	ptr->red = 0;

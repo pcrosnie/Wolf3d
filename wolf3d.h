@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:46 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/03 11:22:20 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 12:18:23 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_data
 	int		red;
 	int		green;
 	int		blue;
-	int		incl;
+	int		shadow;
 	int		color;
 	int		col;
 	int		tmp_len;
@@ -54,5 +54,6 @@ void			ft_set_wall_color(t_data *ptr, double x, double y, double i);
 void			ft_set_color(t_data *ptr);
 int				ft_move(int key, t_data *ptr);
 int				ft_check_pos(t_data *ptr);
+int				ft_shadow(int key, t_data *ptr);
 
 #endif

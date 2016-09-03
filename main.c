@@ -6,7 +6,7 @@
 /*   By: pcrosnie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/01 09:16:22 by pcrosnie          #+#    #+#             */
-/*   Updated: 2016/09/03 11:21:05 by pcrosnie         ###   ########.fr       */
+/*   Updated: 2016/09/03 12:29:34 by pcrosnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		main(int argc, char **argv)
 	ptr->green = 0;
 	ptr->blue = 0;
 	ptr->col = 0;
+	ptr->shadow = 1;
 	ptr->posx = 1;
 	ptr->posy = 1;
 	ft_init(ptr);
